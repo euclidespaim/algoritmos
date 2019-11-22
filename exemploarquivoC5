@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+int main()
+{
+FILE *cli;
+
+struct cliente
+  {int numero;
+   char nome[20];
+  };
+
+struct cliente c;
+
+cli = fopen("arquivo_binario.bin", "a+");
+
+if (cli == NULL)
+
+printf("Erro na abertura do arquivo");
+
+else
+
+{fread(&c, sizeof(struct cliente), 1, cli);
+
+if (ferror(cli))
+
+printf("Erro na leitura");
+
+else printf("Leitura realizada com sucesso");
+
+while (!feof(cli))
+
+{printf("Número do cliente lido:" "%d", c.numero);
+
+printf("Nome do cliente lido:" "%s", c.nome);
+
+fread(&c, sizeof(struct cliente), 1, cli);
+
+if (ferror(cli))
+
+printf("Erro na leitura");
+else printf("Leitura realizada com sucesso");
+}
+
+fclose(cli);
+}
+
+getchar();
+
+return 0;
+}

@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+
+FILE* arquivo = fopen("arquivo_binario.bin", "wb");
+
+if(arquivo == NULL) {
+  fprintf(stderr, "Erro ao tentar abrir arquivo_binario.bin.\n");
+  return 1;
+}
+
+/*Prepara os dados*/
+char dados[] = "Aula de Algoritmos - BSI2019!";
+
+int tamanho = sizeof(dados);
+
+/*Escreve os dados*/
+size_t elementos_escritos = fwrite(dados, 1, tamanho, arquivo);
+
+if(elementos_escritos != tamanho) {
+
+  fprintf(stderr, "Erro ao tentar escrever no arquivo.\n");
+  return 2;
+}
+
+/* Fecha o arquivo */
+fclose(arquivo);
+
+return 0;
+}
